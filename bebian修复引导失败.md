@@ -10,7 +10,8 @@
 > [ 双系统双硬盘 ] 
 先安装WIN11,后安装debian12，grub引导Windows/debian正常，双系统运行良好。重装win11，问题出现：开机直接进入Windows，即使bios中debian的启动项在win之前
 
-#### 解决过程 [未解决 :sob:]
+#### 解决过程 
+> 01/19/2025 未解决 :sob:
 
 > 参考[Grub EFI分区 —— 修复](https://forums.debiancn.org/t/topic/4805)仍未能解决【应该是我对这篇帖子没有理解到位...】
 
