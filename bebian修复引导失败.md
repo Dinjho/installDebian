@@ -1,4 +1,8 @@
-### bebian修复引导失败 求助 :sob:！
+### bebian修复引导失败 【已解决】
+
+--------update 1/20/2025 问题已解决 感谢Zh-Rvw
+
+> 感谢 [Zh-Rvw](https://forums.debiancn.org/t/topic/4805)
 
 
 #### 问题来源
@@ -57,4 +61,53 @@ sudo grub-install /dev/nvme0n1p1   #出现错误提示 找不到EFI目录
 
 
 
-to do...
+-------------update 2025/1/25-----------
+> 按照大佬Zh-Rvw的回复：
+  <img style="text-align: center;" src="[https://github.com/user-attachments/assets/d51bd565-9a1c-4ee5-accc-c08063cfd134](https://github.com/user-attachments/assets/a6d5c7cc-e3d6-4ab2-9849-617e535bbb11)"  width="625" style="max-width:100%;" />
+
+具体方法如下：
+
+- u盘启动，安装界面进入rescue mode。[非grub命令模式]
+  
+- 进入rescue mode后的界面跟安装debian的界面是一样的，一直next，直到出现提示需要mount系统的跟分区/,efi分区,直到出现命令行
+
+
+- 输入blkid，找到/dev/nvme1n1p1 并记录UUID
+  ```
+  输入
+  blkid
+  ```
+  > 为什么是/dev/nvme1n1p1？ 这个分区明明是Microsoft的EFI分区
+   <img style="text-align: center;" src="https://github.com/user-attachments/assets/0d913965-d15c-4a43-95a9-eb5104f5159a"  width="625" style="max-width:100%;" />
+
+- 修改/etc/fstab 文件
+  ```
+  输入
+  nano /etc/fstab
+  ```
+  <img src="https://github.com/user-attachments/assets/57866999-16d9-4d0c-abe7-420c8651fb8f" width="625" style="max-width:100%;" />
+
+> 图中黄线提示/boot/efi在/dev/nvme1n1p1
+  修改红线提示的UUID为前面记录的UUID
+
+- 重新挂载并运行grub指令
+  ```
+  sudo mount -a （重新挂载分区）
+  update-grub
+  grub-install /dev/nvme0n1p1
+  ```
+- 重启 进入系统
+> 以防万一，进系统后我又执行了`sudo update-grub sudo` `grub-install /dev/nvme0n1p1`指令
+  <img src="https://github.com/user-attachments/assets/d6967400-dd5a-4505-9c25-729300f8987c" width="625" style="max-width:100%;" />
+
+大功告成！再次感谢 [Zh-Rvw](https://forums.debiancn.org/t/topic/4805)
+
+
+
+--------------------to do----------------------------------------
+疑问
+第一次尝试修复Grub引导的时候，提示“找不到EFI目录” 
+现在再明白这个EFI指的是Microsoft的EFI[因为重装win11，肯定是找不到的]，而非Debian的efi
+
+
+
