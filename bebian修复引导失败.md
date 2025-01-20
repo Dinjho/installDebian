@@ -110,7 +110,9 @@ sudo grub-install /dev/nvme0n1p1   #出现错误提示 找不到EFI目录
 
 第一次尝试修复Grub引导的时候，错误提示“找不到EFI目录” 但我在Debian的根目录下查看/boot/efi目录是一直存在的 cd到efi查看其文件也都存在 所以这个错误提示困扰了我好久。
 
-现在再明白这个EFI指的是Microsoft的EFI，而非Debian的efi。[因为重装win11，肯定是找不到的]
+现在再明白这个"找不到EFI"指的是找不到Microsoft的EFI，而非Debian的efi。因为重装win11，原来的EFI肯定是找不到的。按照您的建议修改/etc/fstab 文件，其中的/boot/efi行内容修改成了/dev/nvme1n1p1的UUID，这个分区是Microsoft的EFI分区。
+
+不知道我这样理解对不对哦 :sweat:
 
 
 
