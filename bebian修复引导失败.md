@@ -1,8 +1,8 @@
 ### bebian修复引导失败 【已解决】
 
---------update 1/20/2025 问题已解决 感谢Zh-Rvw
 
-> 感谢 [Zh-Rvw](https://forums.debiancn.org/t/topic/4805)
+
+> update 1/20/2025 问题已解决 感谢[Zh-Rvw](https://forums.debiancn.org/t/topic/4805)
 
 
 #### 问题来源
@@ -105,9 +105,14 @@ sudo grub-install /dev/nvme0n1p1   #出现错误提示 找不到EFI目录
 
 
 --------------------to do----------------------------------------
+
 疑问
-第一次尝试修复Grub引导的时候，提示“找不到EFI目录” 
-现在再明白这个EFI指的是Microsoft的EFI[因为重装win11，肯定是找不到的]，而非Debian的efi
+
+第一次尝试修复Grub引导的时候，错误提示“找不到EFI目录” 但我在Debian的根目录下查看/boot/efi目录是一直存在的 cd到efi查看其文件也都存在 所以这个错误提示困扰了我好久。
+
+现在再明白这个EFI指的是Microsoft的EFI，而非Debian的efi。[因为重装win11，肯定是找不到的]
+
+
 
 
 
