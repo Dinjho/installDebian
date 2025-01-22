@@ -113,8 +113,20 @@ sudo grub-install /dev/nvme0n1p1   #出现错误提示 找不到EFI目录
 
 现在再明白这个"找不到EFI"指的是找不到Microsoft的EFI，而非Debian的efi。因为重装win11，原来的EFI肯定是找不到的。按照您的建议修改/etc/fstab 文件，其中的/boot/efi行内容修改成了/dev/nvme1n1p1的UUID，这个分区是Microsoft的EFI分区。
 
-不知道我这样理解对不对哦 :sweat:
+-----疑问解决------
+> update 01/22/2025
+使用easyUEFI查看启动项，如图：
+  <img src="https://github.com/user-attachments/assets/ce9cb70f-554e-4d87-ab6c-4d4a3c9de893" width="625" style="max-width:100%;" />
+使用DiskGienus查看磁盘的分区情况，如图：
+  <img src="https://github.com/user-attachments/assets/e5bb8a81-8851-451d-80c8-91df3063dd6a" width="625" style="max-width:100%;" />
 
+
+  可知：Debian的启动项在Microsoft的ESP分区
+  也就是说Grub引导linux并不是在Linux的的ESP分区建立启动项，而是将Linux的启动项放进Microsoft的ESP分区中。
+  这也就解释了使用grub-install指令时：找不到ESP分区。（而明明Linux的/boot/efi一直在）
+  ```
+   grub-install /dev/nvme0n1p1   // 分区/dev/nvme0/n1p1是Debian安装的地方（Grub会在这个分区下自动寻找efi启动文件，然后将其添加到/dev/nvme1n1p1所在的microsoft所在的ESP分区下）
+ ```
 
 
 
