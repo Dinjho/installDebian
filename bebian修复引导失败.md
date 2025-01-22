@@ -115,10 +115,14 @@ sudo grub-install /dev/nvme0n1p1   #出现错误提示 找不到EFI目录
 
 -----疑问解决------
 > update 01/22/2025
+
 使用easyUEFI查看启动项，如图：
-  <img src="https://github.com/user-attachments/assets/ce9cb70f-554e-4d87-ab6c-4d4a3c9de893" width="625" style="max-width:100%;" />
+
+<img src="https://github.com/user-attachments/assets/ce9cb70f-554e-4d87-ab6c-4d4a3c9de893" width="625" style="max-width:100%;" />
+
 使用DiskGienus查看磁盘的分区情况，如图：
-  <img src="https://github.com/user-attachments/assets/e5bb8a81-8851-451d-80c8-91df3063dd6a" width="625" style="max-width:100%;" />
+
+<img src="https://github.com/user-attachments/assets/e5bb8a81-8851-451d-80c8-91df3063dd6a" width="625" style="max-width:100%;" />
 
 
   可知：Debian的启动项在Microsoft的ESP分区
